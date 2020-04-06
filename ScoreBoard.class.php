@@ -30,20 +30,40 @@ class ScoreBoard {
 
     public function registerPinsDown($pins)
     {
-		// $currentscore = $this->players[$this->currentPlayer]->getScore();
-		// $this->players[$this->currentPlayer]->setScore($currentscore + $pins);
+		$currplayer = $this->currentPlayer;
+		$lastTwoThrows = $this->players[$currplayer]->getLastTwoThrows();
+		// []
+		if (count($this->players[$currplayer]->getLastTwoThrows()) == 0) {
+			$this->players[$currplayer]->setLastTwoThrows([$pins]);
+		}
+		// [1]
+		else if (count($this->players[$currplayer]->getLastTwoThrows()) == 1) {
+			$lastTwoThrows[] = $pins;
+			$this->players[$currplayer]->setLastTwoThrows($lastTwoThrows);
+		}
+		// [1,2]
+		else if (count($this->players[$currplayer]->getLastTwoThrows()) == 2) {
+			// Strike
+			if ($lastTwoThrows[0] == 10) {
+				$this->players[$currplayer]->setScore($this->players[$currplayer]->getScore + $lastTwoThrows[0] + ($lastTwoThrows[1] + $pins));
+			}
+			// Spare
+			else if ($lastTwoThrows[0] + $lastTwoThrows[1] == 10) {
+				$this->players[$currplayer]->setScore($this->players[$currplayer]->getScore + $lastTwoThrows[0] + $lastTwoThrows[1] + $pins);
+			}
+			// Normal scoring
+			else {
+				$this->players[$currplayer]->setScore($this->players[$currplayer]->getScore() + $lastTwoThrows[0] + $lastTwoThrows[1]);
+				$this->players[$currplayer]->setLastTwoThrows([$pins]);
+			}
+		}
+		print_r($this->players[$currplayer]->getLastTwoThrows());
+	}
 
-		$lastTwoThrows = $this->players[$this->currentPlayer]->getLastTwoThrows();
-		if (sizeof($lastTwoThrows) == 2) {
-			array_unshift($lastTwoThrows, $pins);
-			array_pop($lastTwoThrows);
-			$this->players[$this->currentPlayer]->setLastTwoThrows($lastTwoThrows);
-		}
-		else {
-			array_unshift($lastTwoThrows, $pins);
-			$this->players[$this->currentPlayer]->setLastTwoThrows($lastTwoThrows);
-		}
-		print_r($this->players[$this->currentPlayer]->getLastTwoThrows());
+	public function endScore()
+	{
+		$currplayer = $this->currentPlayer;
+		$lastTwoThrows = $this->players[$currplayer]->getLastTwoThrows();
 	}
 
     public function printStatus()

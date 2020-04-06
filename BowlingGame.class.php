@@ -42,13 +42,15 @@ class BowlingGame {
 			}
 			$this->scoreboard->registerPinsDown($trow);
 
-			// Second trow
-			while (true) {
-				$trow = readline("Second throw: ");
-				if (is_numeric($trow)) {
-					break;
+			if ($trow < 10) {
+				// Second trow
+				while (true) {
+					$trow = readline("Second throw: ");
+					if (is_numeric($trow)) {
+						break;
+					}
+					echo "Not a number";
 				}
-				echo "Not a number";
 			}
 			$this->scoreboard->registerPinsDown($trow);
 
