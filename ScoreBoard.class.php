@@ -25,7 +25,7 @@ class ScoreBoard
     {
         $this->currentPlayer += 1;
 		if ($this->currentPlayer == sizeof($this->players)) {
-		   $this->currentPlayer = 0;
+			$this->currentPlayer = 0;
 		}
 	}
 
@@ -39,9 +39,7 @@ class ScoreBoard
 		} else if (count($this->players[$currplayer]->getLastTwoThrows()) == 1) {
 			$lastTwoThrows[] = $pins;
 			$this->players[$currplayer]->setLastTwoThrows($lastTwoThrows);
-		}
-
-		else if (count($this->players[$currplayer]->getLastTwoThrows()) == 2) {
+		} else if (count($this->players[$currplayer]->getLastTwoThrows()) == 2) {
 			// Strike
 			if ($lastTwoThrows[0] == 10) {
 				$this->players[$currplayer]->setScore($this->players[$currplayer]->getScore + $lastTwoThrows[0] + ($lastTwoThrows[1] + $pins));
