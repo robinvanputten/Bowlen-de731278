@@ -1,16 +1,19 @@
 <?php
 
-class Speler {
+class Speler
+{
 	private int $score = 0;
 	private array $lastTwoThrows;
 	private string $name;
 
-	function __construct($name) {
+	function __construct($name)
+	{
 		$this->name = $name;
 		$this->lastTwoThrows = [];
 	}
 
-	function getName() {
+	function getName()
+	{
 		return $this->name;
 	}
 

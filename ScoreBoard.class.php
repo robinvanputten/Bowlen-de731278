@@ -1,7 +1,8 @@
 <?php
 include 'Player.class.php';
 
-class ScoreBoard {
+class ScoreBoard
+{
 	private array $players;
     private int $currentPlayer;
 
@@ -32,27 +33,21 @@ class ScoreBoard {
     {
 		$currplayer = $this->currentPlayer;
 		$lastTwoThrows = $this->players[$currplayer]->getLastTwoThrows();
-		// []
+
 		if (count($this->players[$currplayer]->getLastTwoThrows()) == 0) {
 			$this->players[$currplayer]->setLastTwoThrows([$pins]);
-		}
-		// [1]
-		else if (count($this->players[$currplayer]->getLastTwoThrows()) == 1) {
+		} else if (count($this->players[$currplayer]->getLastTwoThrows()) == 1) {
 			$lastTwoThrows[] = $pins;
 			$this->players[$currplayer]->setLastTwoThrows($lastTwoThrows);
 		}
-		// [1,2]
+
 		else if (count($this->players[$currplayer]->getLastTwoThrows()) == 2) {
 			// Strike
 			if ($lastTwoThrows[0] == 10) {
 				$this->players[$currplayer]->setScore($this->players[$currplayer]->getScore + $lastTwoThrows[0] + ($lastTwoThrows[1] + $pins));
-			}
-			// Spare
-			else if ($lastTwoThrows[0] + $lastTwoThrows[1] == 10) {
+			} else if ($lastTwoThrows[0] + $lastTwoThrows[1] == 10) {
 				$this->players[$currplayer]->setScore($this->players[$currplayer]->getScore + $lastTwoThrows[0] + $lastTwoThrows[1] + $pins);
-			}
-			// Normal scoring
-			else {
+			} else {
 				$this->players[$currplayer]->setScore($this->players[$currplayer]->getScore() + $lastTwoThrows[0] + $lastTwoThrows[1]);
 				$this->players[$currplayer]->setLastTwoThrows([$pins]);
 			}
@@ -71,7 +66,7 @@ class ScoreBoard {
 		echo '[Status]' . PHP_EOL;
 		echo 'Current Player: ' . $this->players[$this->currentPlayer]->getName() . PHP_EOL;
 		foreach ($this->players as $player) {
-			echo $player->getName().PHP_EOL;
+			echo $player->getName() . PHP_EOL;
 			echo '    Score: ' . $player->getScore() . PHP_EOL;
 		}
 		echo PHP_EOL;

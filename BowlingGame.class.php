@@ -1,7 +1,8 @@
 <?php
 include 'ScoreBoard.class.php';
 
-class BowlingGame {
+class BowlingGame
+{
 	private $scoreBoard;
 	private $amountOfPlayers;
 	private $currentround;
@@ -16,7 +17,7 @@ class BowlingGame {
 	{
 		$amountOfPlayers = readline("Amount of players? ");
 		$this->amountOfPlayers = $amountOfPlayers;
-		for ($i=0; $i < $amountOfPlayers; $i++) {
+		for ($i = 0; $i < $amountOfPlayers; $i++) {
 			$play = $i + 1;
 			$playerName = readline("Name of player " . (string)$play . " ");
 			$this->scoreboard->addPlayer($playerName);
@@ -28,7 +29,7 @@ class BowlingGame {
 	{
 		echo "Round " . $this->currentround . PHP_EOL;
 
-		for ($i=0; $i < $this->amountOfPlayers; $i++) {
+		for ($i = 0; $i < $this->amountOfPlayers; $i++) {
 			// Echo current player
 			echo "Current Player: " . $this->scoreboard->getCurrentPlayer()->getName() . PHP_EOL;
 

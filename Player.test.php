@@ -1,7 +1,7 @@
 <?php
 include 'Player.class.php';
 
-// Make new class
+// create a new class
 $player = new Speler('testPlayer');
 
 // Get player name
